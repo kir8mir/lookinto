@@ -18,8 +18,21 @@ app.post(`/bot${botToken}`, (req, res) => {
   res.sendStatus(200);
 });
 
+app.post(`/bot${botToken}`, (req, res) => {
+  const { message } = req.body;
+  
+  if (message) {
+    const { chat, text } = message;
+    console.log('Received message:', text);
+    // Здесь можно выполнить необходимые действия с полученным сообщением
+  }
+  
+  res.sendStatus(200);
+});
+
 bot.on('message', (msg) => {
   const { chat, text } = msg;
+  console.log('!!!!!');
 
   if (chat.type === 'private') {
     // Отправка уведомления на macOS
