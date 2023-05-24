@@ -36,5 +36,5 @@ function sendNotification(title, message) {
 
 app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
-  bot.setWebHook(`https://localhost/bot${botToken}`);
+  bot.setWebHook(`https://lookinto.onrender.com/bot${botToken}`);
 });
