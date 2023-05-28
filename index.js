@@ -18,7 +18,7 @@ const addToUserWord = require("./utils/addToUserWord");
 const app = new Koa();
 const router = Router();
 const port = 3330;
-const url = "https://e566-185-177-189-92.ngrok-free.app";
+const url = "89.40.2.236";
 
 bot.setWebHook(`${url}/bot`);
 
