@@ -18,7 +18,7 @@ const addToUserWord = require("./utils/addToUserWord");
 const app = new Koa();
 const router = Router();
 const port = 3330;
-const url = "89.40.2.236:8443";
+const url = "89.40.2.236";
 
 bot.setWebHook(`${url}/bot`);
 
