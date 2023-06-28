@@ -57,10 +57,10 @@ bot.on("message", (msg) => {
 
   if (text === "/start") {
     (async () => {
-      const isNewUser = getOneUser(chatId);
+      const isNewUser = await getOneUser(chatId);
 
       if (isNewUser) {
-        bot.sendMessage(chatId, "Привет, я бот для изучения английских слов");
+        bot.sendMessage(chatId, `Привет, я бот для изучения английских слов ${isNewUser}`);
       } else {
         bot.sendMessage(chatId, "Привет, ты существуешь");
       }
