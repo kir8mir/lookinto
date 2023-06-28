@@ -15,6 +15,7 @@ const getTranslations = require("./utils/getTranslations");
 const addToNext = require("./utils/addToNext");
 const addToUserWord = require("./utils/addToUserWord");
 const getUpdate = require("./utils/getUpdate");
+const gitHook = require("./utils/gitHook");
 
 const app = new Koa();
 const router = Router();
@@ -23,6 +24,7 @@ const url = "bot.tazasho.shop";
 // const url = "https://cdef-185-177-191-134.ngrok-free.app";
 
 bot.setWebHook(`${url}/bot`);
+app.post(`${url}/githook`, gitHook);
 
 const updateServer = (userId) => {
   const id = userId || '387019250';
