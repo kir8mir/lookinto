@@ -18,8 +18,8 @@ const addToUserWord = require("./utils/addToUserWord");
 const app = new Koa();
 const router = Router();
 const port = 8443;
-// const url = "bot.tazasho.shop";
-const url = "https://cdef-185-177-191-134.ngrok-free.app";
+const url = "bot.tazasho.shop";
+// const url = "https://cdef-185-177-191-134.ngrok-free.app";
 
 bot.setWebHook(`${url}/bot`);
 
