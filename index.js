@@ -67,7 +67,7 @@ bot.on("message", (msg) => {
     })();
   }
   if (text === "/site") {
-    const link = `http://localhost:3000/`;
+    const link = `https://localhost:3000/`;
     const message = `<a href="${link}">22</a>`;
     bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
   }
