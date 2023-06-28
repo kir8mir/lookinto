@@ -65,6 +65,10 @@ bot.on("message", (msg) => {
         bot.sendMessage(chatId, "Привет, ты существуешь");
       }
     })();
+
+    if (text === "/site") {
+      bot.sendMessage(chatId, `http://localhost:3000/${chatId}`);
+    }
   }
 
   if (text.includes("/add")) {
