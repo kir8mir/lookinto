@@ -14,6 +14,7 @@ const getAllUserNext = require("./utils/getAllUserNext");
 const getTranslations = require("./utils/getTranslations");
 const addToNext = require("./utils/addToNext");
 const addToUserWord = require("./utils/addToUserWord");
+const getUpdate = require("./utils/getUpdate");
 
 const app = new Koa();
 const router = Router();
@@ -25,9 +26,13 @@ bot.setWebHook(`${url}/bot`);
 
 const updateServer = (userId) => {
   const id = userId || '387019250';
-  bot.sendMessage(
-    id,  'Сервер обновлен'
-  );
+
+  (async () => {
+    const userAction = await getUpdate()
+    bot.sendMessage(
+      id,  `Сервер обновлен для пользователя ${userAction.email}`
+    );
+  })();
 }
 
 router.post("/bot", (ctx) => {
