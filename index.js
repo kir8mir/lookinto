@@ -67,7 +67,7 @@ bot.on("message", (msg) => {
     })();
   }
   if (text === "/site") {
-    const link = `https://chat.openai.com/c/82ff2139-f316-412b-90e0-333f60b0cac8`;
+    const link = `http://localhost:3000/`;
     const message = `<a href="${link}">22</a>`;
     bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
   }
