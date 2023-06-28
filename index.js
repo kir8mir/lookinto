@@ -18,7 +18,8 @@ const addToUserWord = require("./utils/addToUserWord");
 const app = new Koa();
 const router = Router();
 const port = 8443;
-const url = "bot.tazasho.shop";
+// const url = "bot.tazasho.shop";
+const url = "https://e139-185-177-191-134.ngrok-free.app";
 
 bot.setWebHook(`${url}/bot`);
 
@@ -45,12 +46,6 @@ bot.on("message", (msg) => {
   }
 });
 
-// function sendNotification(title, message) {
-//   notifier.notify({
-//     title: title,
-//     message: message,
-//   });
-// }
 
 bot.onText(/\/go/, (msg) => {
   const chatId = msg.chat.id.toString();
@@ -142,6 +137,6 @@ bot.onText(/\/go/, (msg) => {
   }, 3000);
 });
 
-app.listen(port, () => {
+app.listen(port,  () => {
   console.log(`Express server listening on port ${port}`);
 });
