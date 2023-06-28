@@ -11,7 +11,7 @@ const gitHook = async (ctx) => {
     } else {
       console.log(`Результат выполнения команды git pull: ${stdout}`);
       // Перезагрузить сервер (замените команду на соответствующую для вашей системы)
-      exec('sudo pm2 restart index', (error) => {
+      exec('sudo sudo /root/.nvm/versions/node/v16.18.1/bin/pm2 restart index', (error) => {
         if (error) {
           console.error(`Ошибка при перезагрузке сервера: ${error}`);
           // Обработка ошибки при перезагрузке сервера
