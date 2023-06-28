@@ -28,9 +28,9 @@ const updateServer = (userId) => {
   const id = userId || '387019250';
 
   (async () => {
-    const userAction = await getUpdate()
+    const userAction = await getUpdate();
     bot.sendMessage(
-      id,  `Сервер обновлен для пользователя ${userAction.email}`
+      id,  `Сервер обновлен для пользователя ${userAction}`
     );
   })();
 }
