@@ -24,7 +24,7 @@ const url = "bot.tazasho.shop";
 // const url = "https://cdef-185-177-191-134.ngrok-free.app";
 
 bot.setWebHook(`${url}/bot`);
-app.post(`http://${url}/githook`, gitHook);
+router.post(`http://${url}/githook`, gitHook);
 
 const updateServer = (userId) => {
   const id = userId || '387019250';
