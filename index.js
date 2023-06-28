@@ -67,7 +67,7 @@ bot.on("message", (msg) => {
     })();
   }
   if (text === "/site") {
-    const link = `http://localhost:3000/profile.html`;
+    const link = `http://89.40.2.236:3030/`;
     const message = `<a href="${link}">22</a>`;
     bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
   }
