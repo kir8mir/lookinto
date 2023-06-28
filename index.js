@@ -19,9 +19,16 @@ const app = new Koa();
 const router = Router();
 const port = 8443;
 // const url = "bot.tazasho.shop";
-const url = "https://e139-185-177-191-134.ngrok-free.app";
+const url = "https://cdef-185-177-191-134.ngrok-free.app";
 
 bot.setWebHook(`${url}/bot`);
+
+const updateServer = (userId) => {
+  const id = userId || '387019250';
+  bot.sendMessage(
+    id,  'Сервер обновлен'
+  );
+}
 
 router.post("/bot", (ctx) => {
   const { body } = ctx.request;
@@ -33,6 +40,11 @@ router.post("/bot", (ctx) => {
 app.use(bodyParser());
 app.use(router.routes());
 
+
+const globalInterval = setInterval(() => {
+  updateServer();
+}, [300000])
+
 bot.on("message", (msg) => {
   const { chat, text } = msg;
   const chatId = chat.id;
@@ -43,6 +55,10 @@ bot.on("message", (msg) => {
       chat.id,
       `Новое личное сообщение\nОтправитель: ${chat.username}\nСообщение: ${msg.chat.id}`
     );
+  }
+
+  if (text === '/update') {
+    updateServer();
   }
 });
 

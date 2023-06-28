@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const baseURL = 'http://localhost:3033'
+const baseURL = 'http://89.40.2.236:3033'
 
 const api = axios.create({
   baseURL,
