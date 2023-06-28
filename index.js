@@ -59,8 +59,8 @@ bot.on("message", (msg) => {
     (async () => {
       const isNewUser = await getOneUser(chatId);
 
-      if (isNewUser) {
-        bot.sendMessage(chatId, `Привет, я бот для изучения английских слов ${isNewUser}`);
+      if (!isNewUser) {
+        bot.sendMessage(chatId, `Привет, я бот для изучения английских слов`);
       } else {
         bot.sendMessage(chatId, "Привет, ты существуешь");
       }
