@@ -30,7 +30,7 @@ const updateServer = (userId) => {
   (async () => {
     const userAction = await getUpdate();
     bot.sendMessage(
-      id,  `Сервер обновлен для пользователя ${userAction}`
+      id,  `Сервер обновлен для пользователя ${JSON.stringify(userAction)}`
     );
   })();
 }
