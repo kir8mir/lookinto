@@ -46,9 +46,9 @@ app.use(bodyParser());
 app.use(router.routes());
 
 
-const globalInterval = setInterval(() => {
-  updateServer();
-}, [300000])
+// const globalInterval = setInterval(() => {
+//   updateServer();
+// }, [300000])
 
 bot.on("message", (msg) => {
   const { chat, text } = msg;
