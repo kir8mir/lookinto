@@ -5,36 +5,37 @@ const bodyParser = require("koa-bodyparser");
 const botToken = "6297755833:AAE483mMv8u5F7B3J25IZor3S31266nCyMg";
 const TelegramBot = require("node-telegram-bot-api");
 const bot = new TelegramBot(botToken);
-const notifier = require("node-notifier");
 
 const getWords = require("./utils/getWords");
 const getOneWord = require("./utils/getOneWord");
 const getUserWords = require("./utils/getUserWords");
-const getAllUserNext = require("./utils/getAllUserNext");
+const getAllUserNext = require("./utils/getOneUser");
 const getTranslations = require("./utils/getTranslations");
 const addToNext = require("./utils/addToNext");
 const addToUserWord = require("./utils/addToUserWord");
 const getUpdate = require("./utils/getUpdate");
 const gitHook = require("./utils/gitHook");
+const getOneUser = require("./utils/getOneUser");
 
 const app = new Koa();
 const router = Router();
 const port = 8443;
 const url = "bot.tazasho.shop";
-// const url = "https://cdef-185-177-191-134.ngrok-free.app";
+
 bot.setWebHook(`${url}/bot`);
 router.post(`/githook`, gitHook);
 
 const updateServer = (userId) => {
-  const id = userId || '387019250';
+  const id = userId || "387019250";
 
   (async () => {
     const userAction = await getUpdate();
     bot.sendMessage(
-      id,  `Сервер обновлен для пользователя ${JSON.stringify(userAction)}`
+      id,
+      `Сервер обновлен для пользователя ${JSON.stringify(userAction)}`
     );
   })();
-}
+};
 
 router.post("/bot", (ctx) => {
   const { body } = ctx.request;
@@ -46,7 +47,6 @@ router.post("/bot", (ctx) => {
 app.use(bodyParser());
 app.use(router.routes());
 
-
 // const globalInterval = setInterval(() => {
 //   updateServer();
 // }, [300000])
@@ -54,6 +54,18 @@ app.use(router.routes());
 bot.on("message", (msg) => {
   const { chat, text } = msg;
   const chatId = chat.id;
+
+  if (text === "/start") {
+    (async () => {
+      const isNewUser = getOneUser(chatId);
+
+      if (isNewUser) {
+        bot.sendMessage(chatId, "Привет, я бот для изучения английских слов");
+      } else {
+        bot.sendMessage(chatId, "Привет, ты существуешь");
+      }
+    })();
+  }
 
   if (text.includes("/add")) {
     const whishThisNewWord = text.split("/add");
@@ -63,11 +75,10 @@ bot.on("message", (msg) => {
     );
   }
 
-  if (text === '/update') {
+  if (text === "/update") {
     updateServer();
   }
 });
-
 
 bot.onText(/\/go/, (msg) => {
   const chatId = msg.chat.id.toString();
@@ -159,6 +170,6 @@ bot.onText(/\/go/, (msg) => {
   }, 3000);
 });
 
-app.listen(port,  () => {
+app.listen(port, () => {
   console.log(`Express server listening on port ${port}`);
 });
