@@ -6,12 +6,6 @@ const botToken = "6297755833:AAE483mMv8u5F7B3J25IZor3S31266nCyMg";
 const TelegramBot = require("node-telegram-bot-api");
 const bot = new TelegramBot(botToken);
 
-const getWords = require("./utils/getWords");
-const getOneWord = require("./utils/getOneWord");
-const getUserWords = require("./utils/getUserWords");
-const getAllUserNext = require("./utils/getOneUser");
-const getTranslations = require("./utils/getTranslations");
-const addToUserWord = require("./utils/addToUserWord");
 const getUpdate = require("./utils/getUpdate");
 const gitHook = require("./utils/gitHook");
 const getOneUser = require("./utils/getOneUser");
