@@ -11,7 +11,6 @@ const getOneWord = require("./utils/getOneWord");
 const getUserWords = require("./utils/getUserWords");
 const getAllUserNext = require("./utils/getOneUser");
 const getTranslations = require("./utils/getTranslations");
-const addToNext = require("./utils/addToNext");
 const addToUserWord = require("./utils/addToUserWord");
 const getUpdate = require("./utils/getUpdate");
 const gitHook = require("./utils/gitHook");
@@ -75,7 +74,7 @@ const updateServer = async () => {
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendWrongAnswer(userId, word.id);
-          
+
           const timeout = setTimeout(() => {
             bot.deleteMessage(chatId, messageId);
             clearTimeout(timeout);
