@@ -28,6 +28,7 @@ router.post(`/githook`, gitHook);
 const updateServer = () => {
   async () => {
     const usersActions = await getUpdate();
+    console.log('usersActions', usersActions);
     const { userId, fiveRandomTranslations, word } = usersActions;
     const answers = [
       word.translations[0].title,
