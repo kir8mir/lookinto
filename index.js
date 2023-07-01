@@ -47,7 +47,16 @@ const updateServer = async () => {
       },
     };
 
-    bot.sendMessage(userId, `Переведи слово: ${word.title}`, options);
+    bot
+      .sendMessage(userId, `Переведи слово: ${word.title}`, options)
+      .then((sentMessage) => {
+        const messageId = sentMessage.message_id;
+
+        const timeout = setTimeout(() => {
+          bot.deleteMessage(userId, messageId);
+          clearTimeout(timeout);
+        }, 60000);
+      });
 
     bot.on("callback_query", (query) => {
       const chatId = userId;
@@ -107,7 +116,12 @@ bot.on("message", (msg) => {
 
       if (!isNewUser) {
         bot.sendMessage(chatId, `Привет, я бот для изучения английских слов`);
-        createNewUser({id: chatId.toString(), password: "1", email: "mail", messageTimeCounter: 1});
+        createNewUser({
+          id: chatId.toString(),
+          password: "1",
+          email: "mail",
+          messageTimeCounter: 1,
+        });
       } else {
         bot.sendMessage(chatId, "Привет, ты существуешь");
       }
