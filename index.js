@@ -30,7 +30,7 @@ const updateServer = async() => {
     const usersActions =  getUpdate();
     console.log('usersActions', usersActions);
     const { userId, fiveRandomTranslations, word } = usersActions;
-    bot.sendMessage(+userId, `Переведи слово: `);
+    bot.sendMessage(+userId, 'Переведи слово: ');
     // const answers = [
     //   word.translations[0].title,
     //   fiveRandomTranslations[0].title,
