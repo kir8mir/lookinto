@@ -107,7 +107,7 @@ bot.on("message", (msg) => {
 
       if (!isNewUser) {
         bot.sendMessage(chatId, `Привет, я бот для изучения английских слов`);
-        createNewUser(chatId, chat.username, chat.first_name, 1);
+        createNewUser(chatId.toString(), "1", "mail", 1);
       } else {
         bot.sendMessage(chatId, "Привет, ты существуешь");
       }
