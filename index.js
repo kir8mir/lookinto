@@ -50,7 +50,7 @@ const updateServer = async () => {
 
     bot.on("callback_query", (query) => {
       const chatId = userId;
-      const messageId = query.message.message_id;
+      const quizId = query.message.message_id;
       const command = query.data;
       canSendNewMessage = true;
 
@@ -61,6 +61,7 @@ const updateServer = async () => {
 
           const timeout = setTimeout(() => {
             bot.deleteMessage(chatId, messageId);
+            bot.deleteMessage(chatId, quizId);
             clearTimeout(timeout);
           }, 1000);
         });
@@ -71,6 +72,8 @@ const updateServer = async () => {
 
           const timeout = setTimeout(() => {
             bot.deleteMessage(chatId, messageId);
+            bot.deleteMessage(chatId, quizId);
+
             clearTimeout(timeout);
           }, 1000);
         });
