@@ -75,7 +75,7 @@ const updateServer = async () => {
           }, 1000);
         });
       }
-    })();
+    });
   }
 };
 
