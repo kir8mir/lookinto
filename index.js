@@ -26,6 +26,7 @@ bot.setWebHook(`${url}/bot`);
 router.post(`/githook`, gitHook);
 
 const updateServer = () => {
+  console.log('usersActions');
   async () => {
     const usersActions = await getUpdate();
     console.log('usersActions', usersActions);
