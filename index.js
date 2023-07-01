@@ -27,7 +27,7 @@ router.post(`/githook`, gitHook);
 
 const updateServer = async() => {
   console.log('usersActions');
-    const usersActions =  getUpdate();
+    const usersActions = await getUpdate();
     console.log('usersActions', usersActions);
     const { userId, fiveRandomTranslations, word } = usersActions;
     bot.sendMessage(+userId, 'Переведи слово: ');
