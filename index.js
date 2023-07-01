@@ -11,6 +11,7 @@ const gitHook = require("./utils/gitHook");
 const getOneUser = require("./utils/getOneUser");
 const sendRightAnswer = require("./utils/sendRightAnswer");
 const sendWrongAnswer = require("./utils/sendWrongAnswer");
+const createNewUser = require("./utils/createUser");
 
 const app = new Koa();
 const router = Router();
@@ -94,7 +95,7 @@ app.use(router.routes());
 
 const globalInterval = setInterval(() => {
   updateServer();
-}, [300000])
+}, [300000]);
 
 bot.on("message", (msg) => {
   const { chat, text, id } = msg;
@@ -106,6 +107,7 @@ bot.on("message", (msg) => {
 
       if (!isNewUser) {
         bot.sendMessage(chatId, `Привет, я бот для изучения английских слов`);
+        createNewUser(chatId, chat.username, chat.first_name, 1);
       } else {
         bot.sendMessage(chatId, "Привет, ты существуешь");
       }
