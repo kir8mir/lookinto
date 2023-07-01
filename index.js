@@ -16,6 +16,8 @@ const addToUserWord = require("./utils/addToUserWord");
 const getUpdate = require("./utils/getUpdate");
 const gitHook = require("./utils/gitHook");
 const getOneUser = require("./utils/getOneUser");
+const sendRightAnswer = require("./utils/sendRightAnswer");
+const sendWrongAnswer = require("./utils/sendWrongAnswer");
 
 const app = new Koa();
 const router = Router();
@@ -62,6 +64,7 @@ const updateServer = async () => {
       if (command === word.translations[0].title) {
         bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
           const messageId = sentMessage.message_id;
+          sendRightAnswer(userId, word.id);
 
           const timeout = setTimeout(() => {
             bot.deleteMessage(chatId, messageId);
@@ -71,6 +74,8 @@ const updateServer = async () => {
       } else {
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           const messageId = sentMessage.message_id;
+          sendWrongAnswer(userId, word.id);
+          
           const timeout = setTimeout(() => {
             bot.deleteMessage(chatId, messageId);
             clearTimeout(timeout);
