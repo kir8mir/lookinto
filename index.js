@@ -31,53 +31,53 @@ const updateServer = async() => {
     console.log('usersActions', usersActions);
     const { userId, fiveRandomTranslations, word } = usersActions;
     bot.sendMessage(+userId, `Переведи слово: `);
-    const answers = [
-      word.translations[0].title,
-      fiveRandomTranslations[0].title,
-      fiveRandomTranslations[1].title,
-    ];
-    function compareRandom() {
-      return Math.random() - 0.5;
-    }
-    answers.sort(compareRandom);
+    // const answers = [
+    //   word.translations[0].title,
+    //   fiveRandomTranslations[0].title,
+    //   fiveRandomTranslations[1].title,
+    // ];
+    // function compareRandom() {
+    //   return Math.random() - 0.5;
+    // }
+    // answers.sort(compareRandom);
 
-    const options = {
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: answers[0], callback_data: answers[0] }],
-          [{ text: answers[1], callback_data: answers[1] }],
-          [{ text: answers[2], callback_data: answers[2] }],
-        ],
-      },
-    };
+    // const options = {
+    //   reply_markup: {
+    //     inline_keyboard: [
+    //       [{ text: answers[0], callback_data: answers[0] }],
+    //       [{ text: answers[1], callback_data: answers[1] }],
+    //       [{ text: answers[2], callback_data: answers[2] }],
+    //     ],
+    //   },
+    // };
 
-    bot.sendMessage(userId, `Переведи слово: ${word.title}`, options);
+    // bot.sendMessage(userId, `Переведи слово: ${word.title}`, options);
 
-    bot.on("callback_query", (query) => {
-      const chatId = userId;
-      const messageId = query.message.message_id;
-      const command = query.data;
-      canSendNewMessage = true;
+    // bot.on("callback_query", (query) => {
+    //   const chatId = userId;
+    //   const messageId = query.message.message_id;
+    //   const command = query.data;
+    //   canSendNewMessage = true;
 
-      if (command === word.translations[0].title) {
-        bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
-          const messageId = sentMessage.message_id;
+    //   if (command === word.translations[0].title) {
+    //     bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
+    //       const messageId = sentMessage.message_id;
 
-          const timeout = setTimeout(() => {
-            bot.deleteMessage(chatId, messageId);
-            clearTimeout(timeout);
-          }, 1000);
-        });
-      } else {
-        bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
-          const messageId = sentMessage.message_id;
-          const timeout = setTimeout(() => {
-            bot.deleteMessage(chatId, messageId);
-            clearTimeout(timeout);
-          }, 1000);
-        });
-      }
-    })();
+    //       const timeout = setTimeout(() => {
+    //         bot.deleteMessage(chatId, messageId);
+    //         clearTimeout(timeout);
+    //       }, 1000);
+    //     });
+    //   } else {
+    //     bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
+    //       const messageId = sentMessage.message_id;
+    //       const timeout = setTimeout(() => {
+    //         bot.deleteMessage(chatId, messageId);
+    //         clearTimeout(timeout);
+    //       }, 1000);
+    //     });
+    //   }
+    // })();
 };
 
 router.post("/bot", (ctx) => {
