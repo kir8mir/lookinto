@@ -25,9 +25,8 @@ const url = "bot.tazasho.shop";
 bot.setWebHook(`${url}/bot`);
 router.post(`/githook`, gitHook);
 
-const updateServer = () => {
+const updateServer = async() => {
   console.log('usersActions');
-  async () => {
     const usersActions = await getUpdate();
     console.log('usersActions', usersActions);
     const { userId, fiveRandomTranslations, word } = usersActions;
@@ -78,7 +77,6 @@ const updateServer = () => {
         });
       }
     })();
-  };
 };
 
 router.post("/bot", (ctx) => {
