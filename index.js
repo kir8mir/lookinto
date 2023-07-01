@@ -25,60 +25,61 @@ const url = "bot.tazasho.shop";
 bot.setWebHook(`${url}/bot`);
 router.post(`/githook`, gitHook);
 
-const updateServer = async() => {
-  console.log('usersActions');
-    const usersActions = await getUpdate();
-    console.log('usersActions', usersActions);
-    const { userId, fiveRandomTranslations, word } = usersActions;
-    bot.sendMessage(+userId, 'Переведи слово: ');
-    
-    // const answers = [
-    //   word.translations[0].title,
-    //   fiveRandomTranslations[0].title,
-    //   fiveRandomTranslations[1].title,
-    // ];
-    // function compareRandom() {
-    //   return Math.random() - 0.5;
-    // }
-    // answers.sort(compareRandom);
+const updateServer = async () => {
+  console.log("usersActions");
+  const usersActions = await getUpdate();
+  for (const userAction of usersActions) {
+    const { userId, fiveRandomTranslations, word } = userAction;
+    bot.sendMessage(+userId, "Переведи слово: ");
+  }
 
-    // const options = {
-    //   reply_markup: {
-    //     inline_keyboard: [
-    //       [{ text: answers[0], callback_data: answers[0] }],
-    //       [{ text: answers[1], callback_data: answers[1] }],
-    //       [{ text: answers[2], callback_data: answers[2] }],
-    //     ],
-    //   },
-    // };
+  // const answers = [
+  //   word.translations[0].title,
+  //   fiveRandomTranslations[0].title,
+  //   fiveRandomTranslations[1].title,
+  // ];
+  // function compareRandom() {
+  //   return Math.random() - 0.5;
+  // }
+  // answers.sort(compareRandom);
 
-    // bot.sendMessage(userId, `Переведи слово: ${word.title}`, options);
+  // const options = {
+  //   reply_markup: {
+  //     inline_keyboard: [
+  //       [{ text: answers[0], callback_data: answers[0] }],
+  //       [{ text: answers[1], callback_data: answers[1] }],
+  //       [{ text: answers[2], callback_data: answers[2] }],
+  //     ],
+  //   },
+  // };
 
-    // bot.on("callback_query", (query) => {
-    //   const chatId = userId;
-    //   const messageId = query.message.message_id;
-    //   const command = query.data;
-    //   canSendNewMessage = true;
+  // bot.sendMessage(userId, `Переведи слово: ${word.title}`, options);
 
-    //   if (command === word.translations[0].title) {
-    //     bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
-    //       const messageId = sentMessage.message_id;
+  // bot.on("callback_query", (query) => {
+  //   const chatId = userId;
+  //   const messageId = query.message.message_id;
+  //   const command = query.data;
+  //   canSendNewMessage = true;
 
-    //       const timeout = setTimeout(() => {
-    //         bot.deleteMessage(chatId, messageId);
-    //         clearTimeout(timeout);
-    //       }, 1000);
-    //     });
-    //   } else {
-    //     bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
-    //       const messageId = sentMessage.message_id;
-    //       const timeout = setTimeout(() => {
-    //         bot.deleteMessage(chatId, messageId);
-    //         clearTimeout(timeout);
-    //       }, 1000);
-    //     });
-    //   }
-    // })();
+  //   if (command === word.translations[0].title) {
+  //     bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
+  //       const messageId = sentMessage.message_id;
+
+  //       const timeout = setTimeout(() => {
+  //         bot.deleteMessage(chatId, messageId);
+  //         clearTimeout(timeout);
+  //       }, 1000);
+  //     });
+  //   } else {
+  //     bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
+  //       const messageId = sentMessage.message_id;
+  //       const timeout = setTimeout(() => {
+  //         bot.deleteMessage(chatId, messageId);
+  //         clearTimeout(timeout);
+  //       }, 1000);
+  //     });
+  //   }
+  // })();
 };
 
 router.post("/bot", (ctx) => {
