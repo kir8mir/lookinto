@@ -21,7 +21,7 @@ bot.setWebHook(`${url}/bot`);
 router.post(`/githook`, gitHook);
 
 const updateServer = async () => {
-  console.log("usersActions");
+  bot.removeAllListeners("callback_query");
   const usersActions = await getUpdate();
   for (const userAction of usersActions) {
     const { userId, fiveRandomTranslations, word } = userAction;
