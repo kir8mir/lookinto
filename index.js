@@ -98,6 +98,8 @@ const updateServer = async () => {
             clearTimeout(timeout);
           }, 1000);
         });
+
+        return;
       } else {
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           const messageId = sentMessage.message_id;
