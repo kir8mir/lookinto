@@ -66,7 +66,7 @@ const updateServer = async () => {
       const command = query.data;
       canSendNewMessage = true;
 
-      let userState = userStates.get(userId);
+      let userState = userStates.get(chatId);
       
       if (!userState) {
         // Если состояние пользователя не существует, создаем новый объект состояния
@@ -74,7 +74,7 @@ const updateServer = async () => {
           isQueryProcessed: false
           // Другие свойства состояния пользователя
         };
-        userStates.set(userId, userState);
+        userStates.set(chatId, userState);
       }
       if (userState.isQueryProcessed) {
         return; // Игнорировать повторные вызовы
