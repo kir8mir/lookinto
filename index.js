@@ -59,20 +59,29 @@ const updateServer = async () => {
       });
 
 
-    let isQueryProcessed = false;
+    const userStates = new Map();
     bot.on("callback_query", (query) => {
       const chatId = query.message.chat.id;
       const quizId = query.message.message_id;
       const command = query.data;
       canSendNewMessage = true;
 
-      if (isQueryProcessed) {
+      let userState = userStates.get(userId);
+      
+      if (!userState) {
+        // Если состояние пользователя не существует, создаем новый объект состояния
+        userState = {
+          isQueryProcessed: false
+          // Другие свойства состояния пользователя
+        };
+        userStates.set(userId, userState);
+      }
+      if (userState.isQueryProcessed) {
         return; // Игнорировать повторные вызовы
       }
 
-      isQueryProcessed = true;
-
       if (command === word.translations[0].title) {
+        userState.isQueryProcessed = true
         bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendRightAnswer(userId, word.id);
@@ -84,6 +93,7 @@ const updateServer = async () => {
           }, 1000);
         });
       } else {
+        userState.isQueryProcessed = true
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendWrongAnswer(userId, word.id);
