@@ -146,10 +146,8 @@ bot.on("message", (msg) => {
     updateServer();
   }
 
-  if (text[0] === "/") { 
+  if (text[0] === "/") {
     bot.deleteMessage(chatId, messageId);
-  }
-    clearInterval(globalInterval);
   }
 });
 
