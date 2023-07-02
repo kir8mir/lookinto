@@ -67,6 +67,11 @@ const updateServer = async () => {
       const command = query.data;
       canSendNewMessage = true;
 
+      for (const [key, value] of userStates) {
+        console.log(`Key: ${key}, Value: ${value}`);
+      }
+      
+
       let userState = userStates.get(chatId);
       
       if (!userState) {
