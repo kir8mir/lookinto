@@ -81,7 +81,7 @@ bot.on("callback_query", (query) => {
   const quizId = query.message.message_id;
   const userId = query.from.id;
   const command = query.data;
-
+  bot.sendMessage(chatId, "Пипупа")
   let userState = userStates.get(userId);
 
   if (userState.isQueryProcessed) {
