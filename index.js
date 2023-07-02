@@ -69,6 +69,17 @@ const updateServer = async () => {
       const command = query.data;
 
 
+      let userState = userStates.get(userId);
+
+      if (!userState) {
+        // Если состояние пользователя не существует, создаем новый объект состояния
+        userState = {
+          isQueryProcessed: false,
+          rightAnswer: word.translations[0].title,
+          // Другие свойства состояния пользователя
+        };
+        userStates.set(userId, userState);
+      }
       if (userState.isQueryProcessed) {
         return; // Игнорировать повторные вызовы
       }
