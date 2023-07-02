@@ -93,7 +93,7 @@ bot.on("callback_query", (query) => {
   if (command === userState.rightAnswer) {
     bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
       const messageId = sentMessage.message_id;
-      sendRightAnswer(userId, word.id);
+      // sendRightAnswer(userId, word.id);
 
       const timeout = setTimeout(() => {
         bot.deleteMessage(chatId, messageId);
@@ -108,7 +108,7 @@ bot.on("callback_query", (query) => {
     bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
       userState.isQueryProcessed = true;
       const messageId = sentMessage.message_id;
-      sendWrongAnswer(userId, word.id);
+      // sendWrongAnswer(userId, word.id);
 
       const timeout = setTimeout(() => {
         bot.deleteMessage(chatId, messageId);
