@@ -76,6 +76,7 @@ const updateServer = async () => {
         // Если состояние пользователя не существует, создаем новый объект состояния
         userState = {
           isQueryProcessed: false,
+          rightAnswer: word.translations[0].title,
           // Другие свойства состояния пользователя
         };
         userStates.set(userId, userState);
@@ -84,7 +85,7 @@ const updateServer = async () => {
         return; // Игнорировать повторные вызовы
       }
 
-      if (command === word.translations[0].title) {
+      if (command === userState.rightAnswer) {
         bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendRightAnswer(userId, word.id);
@@ -97,7 +98,7 @@ const updateServer = async () => {
         });
         userState.isQueryProcessed = true;
       } 
-       if (command !== word.translations[0].title) {
+       if (command !== userState.rightAnswer) {
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           userState.isQueryProcessed = true;
           const messageId = sentMessage.message_id;
