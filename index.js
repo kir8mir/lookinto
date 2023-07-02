@@ -188,8 +188,6 @@ bot.on("message", (msg) => {
     bot.deleteMessage(chatId, messageId);
   }
 });
-
-// bot.onText(/\/go/, (msg) => {
 //   const chatId = msg.chat.id.toString();
 //   const messageId = msg.message_id;
 //   bot.deleteMessage(chatId, messageId);
