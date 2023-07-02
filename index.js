@@ -26,7 +26,7 @@ router.post(`/githook`, gitHook);
 const updateServer = async () => {
   bot.removeAllListeners("callback_query");
   userStates.clear();
-  
+
   const usersActions = await getUpdate();
   for (const userAction of usersActions) {
     const { userId, fiveRandomTranslations, word } = userAction;
@@ -71,7 +71,7 @@ const updateServer = async () => {
       const command = query.data;
       canSendNewMessage = true;
 
-      let userState = userStates.get(chatId);
+      let userState = userStates.get(userId);
       
       if (!userState) {
         // Если состояние пользователя не существует, создаем новый объект состояния
@@ -79,7 +79,7 @@ const updateServer = async () => {
           isQueryProcessed: false
           // Другие свойства состояния пользователя
         };
-        userStates.set(chatId, userState);
+        userStates.set(userId, userState);
       }
       if (userState.isQueryProcessed) {
         return; // Игнорировать повторные вызовы
