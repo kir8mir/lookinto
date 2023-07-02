@@ -146,7 +146,7 @@ bot.on("message", (msg) => {
     updateServer();
   }
 
-  if (text.toString()[0] === "/") {
+  if (text[0] === "/") {
     bot.deleteMessage(chatId, messageId);
   }
 });
