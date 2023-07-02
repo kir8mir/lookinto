@@ -131,7 +131,14 @@ bot.on("message", (msg) => {
   if (text === "/site") {
     const link = `https://lookinto.vercel.app/${chatId}`;
     const message = `<a href="${link}">Дашборд</a>`;
-    bot.sendMessage(chatId, message, { parse_mode: "HTML" });
+    bot.sendMessage(chatId, message, { parse_mode: "HTML" }).then((sentMessage) => {
+      const messageId = sentMessage.message_id;
+
+      const timeout = setTimeout(() => {
+        bot.deleteMessage(chatId, messageId);
+        clearTimeout(timeout);
+      }, 10000);
+    });
   }
 
   if (text.includes("/add")) {
