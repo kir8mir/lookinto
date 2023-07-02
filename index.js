@@ -59,7 +59,7 @@ const updateServer = async () => {
       });
 
 
-    // const userStates = new Map();
+    const userStates = new Map();
     bot.on("callback_query", (query) => {
       const chatId = query.message.chat.id;
       const quizId = query.message.message_id;
@@ -67,25 +67,24 @@ const updateServer = async () => {
       const command = query.data;
       canSendNewMessage = true;
 
-      // for (const [key, value] of userStates) {
-      //   console.log(`Key: ${key}, Value: ${value}`);
-      // }
-      
+      for (const [key, value] of userStates) {
+        console.log(`Key: ${key}, Value: ${value}`);
+      }
 
-      // let userState = userStates.get(chatId);
+      let userState = userStates.get(chatId);
       
-      // if (!userState) {
-      //   // Если состояние пользователя не существует, создаем новый объект состояния
-      //   userState = {
-      //     isQueryProcessed: false
-      //     // Другие свойства состояния пользователя
-      //   };
-      //   userStates.set(chatId, userState);
-      // }
-      // if (userState.isQueryProcessed) {
-      //   return; // Игнорировать повторные вызовы
-      // }
-      // userState.isQueryProcessed = true
+      if (!userState) {
+        // Если состояние пользователя не существует, создаем новый объект состояния
+        userState = {
+          isQueryProcessed: false
+          // Другие свойства состояния пользователя
+        };
+        userStates.set(chatId, userState);
+      }
+      if (userState.isQueryProcessed) {
+        return; // Игнорировать повторные вызовы
+      }
+      
       if (command === word.translations[0].title) {
         
         bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
@@ -100,8 +99,8 @@ const updateServer = async () => {
         });
 
       } else {
-        console.log('COOOOOOOMAAAND', command);
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
+          userState.isQueryProcessed = true;
           const messageId = sentMessage.message_id;
           sendWrongAnswer(userId, word.id);
 
