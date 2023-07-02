@@ -63,10 +63,11 @@ const updateServer = async () => {
     bot.on("callback_query", (query) => {
       const chatId = query.message.chat.id;
       const quizId = query.message.message_id;
+      const userId = query.from.id
       const command = query.data;
       canSendNewMessage = true;
 
-      let userState = userStates.get(chatId);
+      let userState = userStates.get(userId);
       
       if (!userState) {
         // Если состояние пользователя не существует, создаем новый объект состояния
@@ -74,7 +75,7 @@ const updateServer = async () => {
           isQueryProcessed: false
           // Другие свойства состояния пользователя
         };
-        userStates.set(chatId, userState);
+        userStates.set(userId, userState);
       }
       if (userState.isQueryProcessed) {
         return; // Игнорировать повторные вызовы
