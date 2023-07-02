@@ -99,7 +99,7 @@ const updateServer = async () => {
           }, 1000);
         });
 
-      } else {
+      } else if (word.translations.some((translation) => translation.title === command)) {
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendWrongAnswer(userId, word.id);
