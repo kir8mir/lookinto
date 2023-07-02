@@ -68,7 +68,7 @@ const updateServer = async () => {
       const userId = query.from.id;
       const command = query.data;
 
-      console.log('comand', command);
+      console.log('comand', command, "right", word.translations[0].title);
 
       let userState = userStates.get(userId);
 
