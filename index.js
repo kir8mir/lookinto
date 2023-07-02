@@ -18,6 +18,8 @@ const router = Router();
 const port = 8443;
 const url = "bot.tazasho.shop";
 
+const userStates = new Map();
+
 bot.setWebHook(`${url}/bot`);
 router.post(`/githook`, gitHook);
 
@@ -59,17 +61,13 @@ const updateServer = async () => {
       });
 
 
-    const userStates = new Map();
+    
     bot.on("callback_query", (query) => {
       const chatId = query.message.chat.id;
       const quizId = query.message.message_id;
       const userId = query.from.id
       const command = query.data;
       canSendNewMessage = true;
-
-      for (const [key, value] of userStates) {
-        console.log(`Key: ${key}, Value: ${value}`);
-      }
 
       let userState = userStates.get(chatId);
       
