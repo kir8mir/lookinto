@@ -100,6 +100,7 @@ const updateServer = async () => {
           }, 1000);
         });
         userState.isQueryProcessed = true;
+        return;
       } 
        if (command !== userState.rightAnswer) {
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
