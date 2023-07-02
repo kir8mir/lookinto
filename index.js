@@ -68,6 +68,8 @@ const updateServer = async () => {
       const userId = query.from.id;
       const command = query.data;
 
+      console.log('comand', command);
+
       let userState = userStates.get(userId);
 
       if (!userState) {
