@@ -59,7 +59,7 @@ const updateServer = async () => {
         const timeout = setTimeout(() => {
           bot.deleteMessage(userId, messageId);
           clearTimeout(timeout);
-        }, 60000);
+        }, 220000);
       });
 
     bot.on("callback_query", (query) => {
