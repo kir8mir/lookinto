@@ -65,7 +65,6 @@ const updateServer = async () => {
       canSendNewMessage = true;
 
       if (command === word.translations[0].title) {
-        bot.removeAllListeners("callback_query");
         bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendRightAnswer(userId, word.id);
@@ -77,7 +76,6 @@ const updateServer = async () => {
           }, 1000);
         });
       } else {
-        bot.removeAllListeners("callback_query");
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendWrongAnswer(userId, word.id);
