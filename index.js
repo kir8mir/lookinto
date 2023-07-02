@@ -127,8 +127,6 @@ bot.on("message", (msg) => {
         bot.sendMessage(chatId, "Привет, ты существуешь");
       }
     })();
-
-    bot.deleteMessage(chatId, messageId);
   }
   if (text === "/site") {
     const link = `https://lookinto.vercel.app/${chatId}`;
@@ -146,6 +144,12 @@ bot.on("message", (msg) => {
 
   if (text === "/update") {
     updateServer();
+  }
+
+  if (text[0] === "/") { 
+    bot.deleteMessage(chatId, messageId);
+  }
+    clearInterval(globalInterval);
   }
 });
 
