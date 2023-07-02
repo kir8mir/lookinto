@@ -25,6 +25,8 @@ router.post(`/githook`, gitHook);
 
 const updateServer = async () => {
   bot.removeAllListeners("callback_query");
+  userStates.clear();
+  
   const usersActions = await getUpdate();
   for (const userAction of usersActions) {
     const { userId, fiveRandomTranslations, word } = userAction;
