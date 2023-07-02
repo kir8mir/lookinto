@@ -80,9 +80,9 @@ const updateServer = async () => {
       if (userState.isQueryProcessed) {
         return; // Игнорировать повторные вызовы
       }
-
+      userState.isQueryProcessed = true
       if (command === word.translations[0].title) {
-        userState.isQueryProcessed = true
+        
         bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendRightAnswer(userId, word.id);
@@ -94,7 +94,6 @@ const updateServer = async () => {
           }, 1000);
         });
       } else {
-        userState.isQueryProcessed = true
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendWrongAnswer(userId, word.id);
