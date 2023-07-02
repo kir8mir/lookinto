@@ -109,6 +109,7 @@ const globalInterval = setInterval(() => {
 bot.on("message", (msg) => {
   const { chat, text, id } = msg;
   const chatId = chat.id;
+  const messageId = msg.message_id;
 
   if (text === "/start") {
     (async () => {
@@ -126,6 +127,8 @@ bot.on("message", (msg) => {
         bot.sendMessage(chatId, "Привет, ты существуешь");
       }
     })();
+
+    bot.deleteMessage(chatId, messageId);
   }
   if (text === "/site") {
     const link = `https://lookinto.vercel.app/${chatId}`;
