@@ -73,51 +73,52 @@ const updateServer = async () => {
           clearTimeout(timeout);
         }, 60000);
       });
+
+      bot.on("callback_query", (query) => {
+        const chatId = query.message.chat.id;
+        const quizId = query.message.message_id;
+        const userId = query.from.id;
+        const command = query.data;
+        bot.sendMessage(chatId, "Пипупа")
+        let userState = userStates.get(userId);
+      
+        if (userState.isQueryProcessed) {
+          return; // Игнорировать повторные вызовы
+        }
+      
+        console.log("comand", command, "right", userState);
+      
+        if (command === userState.rightAnswer) {
+          bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
+            const messageId = sentMessage.message_id;
+            // sendRightAnswer(userId, word.id);
+      
+            const timeout = setTimeout(() => {
+              bot.deleteMessage(chatId, messageId);
+              bot.deleteMessage(chatId, quizId);
+              clearTimeout(timeout);
+            }, 1000);
+          });
+          userState.isQueryProcessed = true;
+          return;
+        }
+        if (command !== userState.rightAnswer) {
+          bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
+            userState.isQueryProcessed = true;
+            const messageId = sentMessage.message_id;
+            // sendWrongAnswer(userId, word.id);
+      
+            const timeout = setTimeout(() => {
+              bot.deleteMessage(chatId, messageId);
+              bot.deleteMessage(chatId, quizId);
+      
+              clearTimeout(timeout);
+            }, 1000);
+          });
+          userState.isQueryProcessed = true;
+        }
+      });
   }
-  bot.on("callback_query", (query) => {
-    const chatId = query.message.chat.id;
-    const quizId = query.message.message_id;
-    const userId = query.from.id;
-    const command = query.data;
-    bot.sendMessage(chatId, "Пипупа")
-    let userState = userStates.get(userId);
-  
-    if (userState.isQueryProcessed) {
-      return; // Игнорировать повторные вызовы
-    }
-  
-    console.log("comand", command, "right", userState);
-  
-    if (command === userState.rightAnswer) {
-      bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
-        const messageId = sentMessage.message_id;
-        // sendRightAnswer(userId, word.id);
-  
-        const timeout = setTimeout(() => {
-          bot.deleteMessage(chatId, messageId);
-          bot.deleteMessage(chatId, quizId);
-          clearTimeout(timeout);
-        }, 1000);
-      });
-      userState.isQueryProcessed = true;
-      return;
-    }
-    if (command !== userState.rightAnswer) {
-      bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
-        userState.isQueryProcessed = true;
-        const messageId = sentMessage.message_id;
-        // sendWrongAnswer(userId, word.id);
-  
-        const timeout = setTimeout(() => {
-          bot.deleteMessage(chatId, messageId);
-          bot.deleteMessage(chatId, quizId);
-  
-          clearTimeout(timeout);
-        }, 1000);
-      });
-      userState.isQueryProcessed = true;
-    }
-  });
 };
 
 
