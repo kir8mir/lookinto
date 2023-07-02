@@ -65,8 +65,8 @@ const updateServer = async () => {
     bot.on("callback_query", (query) => {
       const chatId = query.message.chat.id;
       const quizId = query.message.message_id;
+      const userId = query.from.id;
       const command = query.data;
-      canSendNewMessage = true;
 
       let userState = userStates.get(userId);
 
