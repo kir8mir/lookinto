@@ -94,6 +94,7 @@ const updateServer = async () => {
             clearTimeout(timeout);
           }, 1000);
         });
+        userState.isQueryProcessed = true;
         return;
       } 
        if (command !== word.translations[0].title) {
@@ -109,6 +110,7 @@ const updateServer = async () => {
             clearTimeout(timeout);
           }, 1000);
         });
+        userState.isQueryProcessed = true;
         return;
       }
     });
