@@ -68,7 +68,6 @@ const updateServer = async () => {
       const userId = query.from.id;
       const command = query.data;
 
-      console.log('comand', command, "right", word.translations[0].title);
 
       let userState = userStates.get(userId);
 
@@ -84,6 +83,8 @@ const updateServer = async () => {
       if (userState.isQueryProcessed) {
         return; // Игнорировать повторные вызовы
       }
+
+      console.log('comand', command, "right", userState);
 
       if (command === userState.rightAnswer) {
         bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
