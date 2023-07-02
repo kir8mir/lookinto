@@ -96,7 +96,7 @@ const updateServer = async () => {
           }, 1000);
         });
 
-      } else {
+      } else if (!userState.isQueryProcessed){
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
           userState.isQueryProcessed = true;
           const messageId = sentMessage.message_id;
