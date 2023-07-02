@@ -65,7 +65,6 @@ const updateServer = async () => {
       canSendNewMessage = true;
 
       if (command === word.translations[0].title) {
-        bot.removeAllListeners("callback_query");
         bot.sendMessage(chatId, "Правильно").then((sentMessage) => {
           const messageId = sentMessage.message_id;
           sendRightAnswer(userId, word.id);
@@ -76,9 +75,10 @@ const updateServer = async () => {
             clearTimeout(timeout);
           }, 1000);
         });
+
+        return;
       } else {
         bot.sendMessage(chatId, "Не угадало").then((sentMessage) => {
-          bot.removeAllListeners("callback_query");
           const messageId = sentMessage.message_id;
           sendWrongAnswer(userId, word.id);
 
@@ -89,6 +89,7 @@ const updateServer = async () => {
             clearTimeout(timeout);
           }, 1000);
         });
+        return;
       }
     });
   }
@@ -133,14 +134,16 @@ bot.on("message", (msg) => {
   if (text === "/site") {
     const link = `https://lookinto.vercel.app/${chatId}`;
     const message = `<a href="${link}">Дашборд</a>`;
-    bot.sendMessage(chatId, message, { parse_mode: "HTML" }).then((sentMessage) => {
-      const messageId = sentMessage.message_id;
+    bot
+      .sendMessage(chatId, message, { parse_mode: "HTML" })
+      .then((sentMessage) => {
+        const messageId = sentMessage.message_id;
 
-      const timeout = setTimeout(() => {
-        bot.deleteMessage(chatId, messageId);
-        clearTimeout(timeout);
-      }, 10000);
-    });
+        const timeout = setTimeout(() => {
+          bot.deleteMessage(chatId, messageId);
+          clearTimeout(timeout);
+        }, 10000);
+      });
   }
 
   if (text.includes("/add")) {
